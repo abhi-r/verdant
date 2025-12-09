@@ -47,16 +47,16 @@ function filterProducts(products, filters) {
     if (filters.thcRange) {
       const thc = parseFloat(product.thc);
       if (filters.thcRange === 'low' && thc > 10) return false;
-      if (filters.thcRange === 'medium' && (thc <= 10 || thc > 20)) return false;
-      if (filters.thcRange === 'high' && thc <= 20) return false;
+      if (filters.thcRange === 'medium' && (thc < 10 || thc >= 20)) return false;
+      if (filters.thcRange === 'high' && thc < 20) return false;
     }
     
     // CBD range filter
     if (filters.cbdRange) {
       const cbd = parseFloat(product.cbd);
       if (filters.cbdRange === 'low' && cbd > 5) return false;
-      if (filters.cbdRange === 'medium' && (cbd <= 5 || cbd > 15)) return false;
-      if (filters.cbdRange === 'high' && cbd <= 15) return false;
+      if (filters.cbdRange === 'medium' && (cbd < 5 || cbd >= 15)) return false;
+      if (filters.cbdRange === 'high' && cbd < 15) return false;
     }
     
     // Search term
@@ -114,7 +114,7 @@ function renderProductCard(product, category) {
 // Render products grid
 function renderProducts(products, containerId, category) {
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container || !Array.isArray(products)) return;
   
   if (products.length === 0) {
     container.innerHTML = `
@@ -170,6 +170,12 @@ function setupSearch(activeFilters, applyFiltersCallback, products = null, categ
   const searchInput = document.getElementById('searchInput');
   if (!searchInput) return;
 
+  // Prevent duplicate listener setup
+  if (searchInput.dataset.searchSetup === 'true') {
+    return;
+  }
+  searchInput.dataset.searchSetup = 'true';
+
   // Check for URL search parameter
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get('q');
@@ -199,12 +205,13 @@ function setupSearch(activeFilters, applyFiltersCallback, products = null, categ
     }
   });
 
-  // Close autosuggest when clicking outside
-  document.addEventListener('click', (e) => {
+  // Close autosuggest when clicking outside (single listener on document)
+  const handleClickOutside = (e) => {
     if (!e.target.closest('.search-container')) {
       closeAutosuggest(searchInput);
     }
-  });
+  };
+  document.addEventListener('click', handleClickOutside);
 }
 
 // Update autosuggest dropdown
@@ -249,15 +256,21 @@ function updateAutosuggest(searchInput, products, category) {
   if (suggestions.length === 0) {
     dropdown.innerHTML = `<div class="autosuggest-no-results">No products found</div>`;
   } else {
-    dropdown.innerHTML = suggestions.map(product => `
-      <div class="autosuggest-item" onclick="selectSuggestion('${product.name}', '${product.id}', '${category}')">
+    dropdown.innerHTML = suggestions.map(product => {
+      const safeName = escapeHtml(product.name);
+      const safeType = escapeHtml(product.type);
+      const safeId = escapeHtml(product.id);
+      const safeCat = escapeHtml(category);
+      return `
+      <div class="autosuggest-item" onclick="selectSuggestion('${safeName}', '${safeId}', '${safeCat}')">
         <div class="autosuggest-item-icon">🌿</div>
         <div class="autosuggest-item-content">
-          <div class="autosuggest-item-name">${product.name}</div>
-          <div class="autosuggest-item-meta">${product.type}</div>
+          <div class="autosuggest-item-name">${safeName}</div>
+          <div class="autosuggest-item-meta">${safeType}</div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   dropdown.classList.add('active');
@@ -271,21 +284,37 @@ function closeAutosuggest(searchInput) {
   }
 }
 
+// Escape HTML special characters for safe DOM insertion
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
 // Handle suggestion selection
 function selectSuggestion(productName, productId, category) {
   const searchInput = document.getElementById('searchInput') || document.getElementById('heroSearch');
   if (searchInput) {
     searchInput.value = productName;
+    closeAutosuggest(searchInput);
   }
-  closeAutosuggest(searchInput);
 
-  // Navigate to product detail page
-  window.location.href = `product.html?id=${productId}&category=${category}`;
+  // Validate inputs before navigation
+  if (productId && category && typeof productId === 'string' && typeof category === 'string') {
+    window.location.href = `product.html?id=${encodeURIComponent(productId)}&category=${encodeURIComponent(category)}`;
+  }
 }
 
 // Navigate to product detail page
 function viewProduct(productId, category) {
-  window.location.href = `product.html?id=${productId}&category=${category}`;
+  if (productId && category && typeof productId === 'string' && typeof category === 'string') {
+    window.location.href = `product.html?id=${encodeURIComponent(productId)}&category=${encodeURIComponent(category)}`;
+  }
 }
 
 // Star rating display

@@ -177,7 +177,7 @@ nav a::after {
   width: 0;
   height: 2px;
   background: var(--primary);
-  transition: width 0.3s ease;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 nav a:hover::after,
@@ -288,14 +288,6 @@ nav a.active::after {
 }
 
 /* Autosuggest Dropdown */
-.search-container {
-  position: relative;
-}
-
-.search-bar {
-  position: relative;
-}
-
 .autosuggest-dropdown {
   display: none;
   position: absolute;
@@ -395,7 +387,7 @@ nav a.active::after {
   background: var(--primary);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .path-card:hover::before {
@@ -530,7 +522,7 @@ nav a.active::after {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1001;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter-overlay.active {
@@ -548,7 +540,7 @@ nav a.active::after {
   height: 100vh;
   background: var(--surface);
   z-index: 1002;
-  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition);
   overflow-y: auto;
   box-shadow: var(--shadow-lg);
 }
@@ -977,10 +969,7 @@ nav a.active::after {
   }
 
   .filters-panel {
-    padding-top: var(--space-md);
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
-    padding-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-md) var(--space-lg) var(--space-md);
   }
 
   .filters-panel-header.show {

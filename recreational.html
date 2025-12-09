@@ -127,10 +127,10 @@
   </main>
 
   <!-- Mobile Filter Toggle Button -->
-  <button class="filter-toggle-btn" onclick="toggleFilterPanel()">🔧</button>
+  <button class="filter-toggle-btn" onclick="toggleFilterPanel()" aria-label="Toggle filters" aria-expanded="false" aria-controls="filtersPanel">🔧</button>
 
   <!-- Filter Overlay -->
-  <div class="filter-overlay" id="filterOverlay" onclick="closeFilterPanel()"></div>
+  <div class="filter-overlay" id="filterOverlay" onclick="closeFilterPanel()" role="presentation"></div>
 
   <!-- Mobile Filter Panel -->
   <div class="filters-panel" id="filtersPanel">
@@ -184,17 +184,32 @@
     function toggleFilterPanel() {
       const panel = document.getElementById('filtersPanel');
       const overlay = document.getElementById('filterOverlay');
+      const btn = document.querySelector('.filter-toggle-btn');
+      const isOpen = panel.classList.contains('active');
+
       panel.classList.toggle('active');
       overlay.classList.toggle('active');
-      document.body.style.overflow = panel.classList.contains('active') ? 'hidden' : 'auto';
+      document.body.style.overflow = !isOpen ? 'hidden' : 'auto';
+
+      // Update aria-expanded for accessibility
+      if (btn) {
+        btn.setAttribute('aria-expanded', !isOpen);
+      }
     }
 
     function closeFilterPanel() {
       const panel = document.getElementById('filtersPanel');
       const overlay = document.getElementById('filterOverlay');
+      const btn = document.querySelector('.filter-toggle-btn');
+
       panel.classList.remove('active');
       overlay.classList.remove('active');
       document.body.style.overflow = 'auto';
+
+      // Update aria-expanded for accessibility
+      if (btn) {
+        btn.setAttribute('aria-expanded', 'false');
+      }
     }
 
     function setupMobileFilters() {
