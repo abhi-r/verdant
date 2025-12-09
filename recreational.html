@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recreational Products - Verdant</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header id="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Verdant</a>
+      <nav>
+        <ul>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="medical.html" class="medical-accent">Medical</a></li>
+          <li><a href="recreational.html" class="active recreational-accent">Recreational</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding-top: calc(var(--header-height) + var(--space-lg));">
+    <div class="container">
+      <div style="margin-bottom: var(--space-xl);">
+        <h1 class="recreational-accent">Recreational Cannabis Products</h1>
+        <p style="margin-top: var(--space-sm); color: var(--text-secondary);">THC products for personal enjoyment. Curated information from verified community sources and expert reviews.</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container" style="max-width: 100%; margin-bottom: var(--space-lg);">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search by strain name, slang, or desired effects...">
+          <button onclick="applyFilters()">Search</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 300px 1fr; gap: var(--space-lg);">
+        <!-- Filters Sidebar -->
+        <aside>
+          <div class="filters-container">
+            <h3 style="margin-bottom: var(--space-md); font-size: 1.25rem;">Filters</h3>
+            
+            <div class="filter-group">
+              <label>Strain Type</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="type" data-value="Sativa">Sativa</div>
+                <div class="filter-tag" data-filter="type" data-value="Indica">Indica</div>
+                <div class="filter-tag" data-filter="type" data-value="Sativa Hybrid">Sativa Hybrid</div>
+                <div class="filter-tag" data-filter="type" data-value="Indica Hybrid">Indica Hybrid</div>
+                <div class="filter-tag" data-filter="type" data-value="Balanced Hybrid">Balanced</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Format</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="format" data-value="Flower">Flower</div>
+                <div class="filter-tag" data-filter="format" data-value="Concentrate">Concentrate</div>
+                <div class="filter-tag" data-filter="format" data-value="Edible">Edible</div>
+                <div class="filter-tag" data-filter="format" data-value="Vape">Vape</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Desired Effects</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="effects" data-value="euphoria">Euphoria</div>
+                <div class="filter-tag" data-filter="effects" data-value="relaxation">Relaxation</div>
+                <div class="filter-tag" data-filter="effects" data-value="energy">Energy</div>
+                <div class="filter-tag" data-filter="effects" data-value="creativity">Creativity</div>
+                <div class="filter-tag" data-filter="effects" data-value="focus">Focus</div>
+                <div class="filter-tag" data-filter="effects" data-value="sedation">Sedation</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Mood</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="effects" data-value="happy">Happy</div>
+                <div class="filter-tag" data-filter="effects" data-value="relaxed">Relaxed</div>
+                <div class="filter-tag" data-filter="effects" data-value="uplifted">Uplifted</div>
+                <div class="filter-tag" data-filter="effects" data-value="energized">Energized</div>
+                <div class="filter-tag" data-filter="effects" data-value="creative">Creative</div>
+                <div class="filter-tag" data-filter="effects" data-value="sleepy">Sleepy</div>
+                <div class="filter-tag" data-filter="effects" data-value="giggly">Giggly</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>THC Potency</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="thcRange" data-value="low">Low (0-15%)</div>
+                <div class="filter-tag" data-filter="thcRange" data-value="medium">Medium (15-23%)</div>
+                <div class="filter-tag" data-filter="thcRange" data-value="high">High (23%+)</div>
+              </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="clearFilters()" style="width: 100%; margin-top: var(--space-md);">Clear All Filters</button>
+          </div>
+
+          <!-- Info Box -->
+          <div class="info-card" style="margin-top: var(--space-md);">
+            <h4 style="margin-bottom: var(--space-sm);">⚡ Start Low, Go Slow</h4>
+            <p style="font-size: 0.85rem;">If you're new to cannabis or trying a new strain, start with a small amount and wait for effects before consuming more.</p>
+          </div>
+
+          <div class="info-card" style="margin-top: var(--space-md);">
+            <h4 style="margin-bottom: var(--space-sm);">🎯 Popular Choices</h4>
+            <p style="font-size: 0.85rem;"><strong>Daytime:</strong> Sour Diesel, Green Crack, Jack Herer<br><strong>Evening:</strong> OG Kush, Northern Lights, Granddaddy Purple</p>
+          </div>
+        </aside>
+
+        <!-- Products Grid -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+            <div id="resultsCount" style="color: var(--text-secondary); font-size: 0.9rem;">Loading products...</div>
+            <a href="compare.html?category=recreational" class="btn btn-secondary">Compare Products</a>
+          </div>
+          
+          <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    let products = [];
+    let activeFilters = {};
+
+    // Initialize page
+    async function init() {
+      const data = await window.verdant.loadProducts();
+      products = data.recreational;
+      
+      // Setup event listeners
+      window.verdant.setupFilterTags(activeFilters, applyFilters);
+      window.verdant.setupSearch(activeFilters, applyFilters);
+      
+      // Initial render
+      applyFilters();
+    }
+
+    // Apply filters and render
+    function applyFilters() {
+      const filtered = window.verdant.filterProducts(products, activeFilters);
+      window.verdant.renderProducts(filtered, 'productsGrid', 'recreational');
+    }
+
+    // Clear all filters
+    function clearFilters() {
+      activeFilters = {};
+      document.querySelectorAll('.filter-tag.active').forEach(tag => {
+        tag.classList.remove('active');
+      });
+      document.getElementById('searchInput').value = '';
+      applyFilters();
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Start
+    init();
+  </script>
+</body>
+</html>

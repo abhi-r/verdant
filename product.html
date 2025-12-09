@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Verdant</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header id="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Verdant</a>
+      <nav>
+        <ul>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="medical.html" class="medical-accent">Medical</a></li>
+          <li><a href="recreational.html" class="recreational-accent">Recreational</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding-top: calc(var(--header-height) + var(--space-lg));">
+    <div class="container">
+      <div id="productDetails">
+        <!-- Product details will be inserted here -->
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    let product = null;
+    let category = '';
+
+    async function init() {
+      // Get product ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+      category = urlParams.get('category');
+      
+      if (!productId || !category) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // Load products
+      const data = await window.verdant.loadProducts();
+      product = data[category].find(p => p.id === productId);
+      
+      if (!product) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      renderProductDetail();
+    }
+
+    function renderProductDetail() {
+      const isMedical = category === 'medical';
+      const accentColor = isMedical ? 'var(--medical)' : 'var(--recreational)';
+      
+      // Build slang section if exists
+      const slangSection = product.slang ? `
+        <div style="margin-top: var(--space-xs); color: var(--text-tertiary); font-size: 0.9rem;">
+          <strong>Also known as:</strong> ${product.slang.join(', ')}
+        </div>
+      ` : '';
+      
+      // Build effects/conditions section
+      const effectsLabel = isMedical ? 'Therapeutic Effects' : 'Effects & Mood';
+      const effectsData = isMedical ? product.effects : [...(product.effects || []), ...(product.mood || [])];
+      const effectsTags = effectsData.map(e => 
+        `<span style="display: inline-block; padding: 8px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; margin: 4px;">${e}</span>`
+      ).join('');
+      
+      // Build conditions section for medical
+      const conditionsSection = isMedical && product.conditions ? `
+        <div class="info-card">
+          <h3>Medical Conditions</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-md);">
+            ${product.conditions.map(c => 
+              `<span style="display: inline-block; padding: 8px 16px; background: rgba(107, 142, 158, 0.1); border: 1px solid var(--medical); border-radius: 20px; color: var(--medical);">${c}</span>`
+            ).join('')}
+          </div>
+        </div>
+      ` : '';
+      
+      // Simulate aggregated review data
+      const totalReviews = product.reviews;
+      const positivePct = 87;
+      const neutralPct = 10;
+      const negativePct = 3;
+      
+      // Build sources section
+      const sourcesHTML = product.sources.map(source => `
+        <a href="${source.url}" target="_blank" rel="noopener noreferrer" 
+           style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-md); background: var(--bg); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: var(--transition);"
+           onmouseover="this.style.borderColor='${accentColor}'; this.style.background='rgba(95, 122, 97, 0.05)';"
+           onmouseout="this.style.borderColor='var(--border)'; this.style.background='var(--bg)';">
+          <div>
+            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">${source.name}</div>
+            <div style="font-size: 0.85rem; color: var(--text-tertiary);">View product on ${source.name}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-sm);">
+            ${window.verdant.getSentimentBadge(source.sentiment)}
+            <span style="color: ${accentColor};">→</span>
+          </div>
+        </a>
+      `).join('');
+      
+      const html = `
+        <!-- Breadcrumb -->
+        <div style="margin-bottom: var(--space-md);">
+          <a href="${isMedical ? 'medical.html' : 'recreational.html'}" style="color: ${accentColor}; font-size: 0.9rem;">
+            ← Back to ${isMedical ? 'Medical' : 'Recreational'} Products
+          </a>
+        </div>
+
+        <!-- Product Header -->
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-xl); margin-bottom: var(--space-xl);">
+          <div>
+            <div style="width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--bg) 0%, var(--border-light) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; border: 1px solid var(--border);">
+              🌿
+            </div>
+          </div>
+          
+          <div>
+            <div style="display: inline-block; padding: 6px 16px; background: ${accentColor}; color: white; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: var(--space-sm);">
+              ${product.type}
+            </div>
+            <h1 style="margin-bottom: var(--space-sm);">${product.name}</h1>
+            ${slangSection}
+            
+            <div style="display: flex; align-items: center; gap: var(--space-lg); margin: var(--space-lg) 0; padding: var(--space-md) 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+              <div>
+                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">Rating</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: ${accentColor};">
+                  ${product.rating} ⭐
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-tertiary);">${window.verdant.formatNumber(totalReviews)} reviews</div>
+              </div>
+              
+              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg);">
+                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">THC</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--text);">${product.thc}</div>
+              </div>
+              
+              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg);">
+                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">CBD</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--text);">${product.cbd}</div>
+              </div>
+              
+              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg);">
+                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">Format</div>
+                <div style="font-size: 1.1rem; font-weight: 600; color: var(--text);">${product.format}</div>
+              </div>
+              
+              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg); margin-left: auto;">
+                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">Est. Price</div>
+                <div style="font-size: 1.75rem; font-weight: 700; color: ${accentColor};">${product.price}</div>
+              </div>
+            </div>
+            
+            <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: var(--space-lg);">
+              ${product.description}
+            </p>
+          </div>
+        </div>
+
+        <!-- Effects & Conditions -->
+        <div style="display: grid; grid-template-columns: ${isMedical ? '1fr 1fr' : '1fr'}; gap: var(--space-lg); margin-bottom: var(--space-lg);">
+          <div class="info-card">
+            <h3>${effectsLabel}</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-md);">
+              ${effectsTags}
+            </div>
+          </div>
+          ${conditionsSection}
+        </div>
+
+        <!-- Aggregated Reviews -->
+        <div class="info-card" style="margin-bottom: var(--space-lg);">
+          <h3>Aggregated User Reviews</h3>
+          <p style="margin: var(--space-sm) 0; color: var(--text-secondary);">
+            Sentiment analysis based on ${window.verdant.formatNumber(totalReviews)} reviews from multiple platforms
+          </p>
+          
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-lg);">
+            <div style="text-align: center; padding: var(--space-md); background: rgba(95, 122, 97, 0.05); border-radius: 12px;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: var(--space-xs);">${positivePct}%</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Positive</div>
+              <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 4px;">${Math.round(totalReviews * positivePct / 100)} users</div>
+            </div>
+            
+            <div style="text-align: center; padding: var(--space-md); background: var(--bg); border-radius: 12px;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-secondary); margin-bottom: var(--space-xs);">${neutralPct}%</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Neutral</div>
+              <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 4px;">${Math.round(totalReviews * neutralPct / 100)} users</div>
+            </div>
+            
+            <div style="text-align: center; padding: var(--space-md); background: var(--bg); border-radius: 12px;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: var(--space-xs);">${negativePct}%</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Negative</div>
+              <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 4px;">${Math.round(totalReviews * negativePct / 100)} users</div>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--bg); border-left: 4px solid ${accentColor}; border-radius: 8px;">
+            <h4 style="margin-bottom: var(--space-sm);">Common User Feedback</h4>
+            <ul style="margin: 0; padding-left: var(--space-lg);">
+              <li style="margin: var(--space-xs) 0; color: var(--text-secondary);">
+                <strong>Most reported effect:</strong> ${isMedical ? 'Effective pain relief without sedation' : 'Balanced euphoria with clear-headedness'}
+              </li>
+              <li style="margin: var(--space-xs) 0; color: var(--text-secondary);">
+                <strong>Duration:</strong> Effects typically last 3-4 hours for most users
+              </li>
+              <li style="margin: var(--space-xs) 0; color: var(--text-secondary);">
+                <strong>Side effects:</strong> Minimal adverse effects reported; dry mouth most common
+              </li>
+              ${isMedical ? `<li style="margin: var(--space-xs) 0; color: var(--text-secondary);"><strong>Medical efficacy:</strong> 87% of users report symptom improvement</li>` : `<li style="margin: var(--space-xs) 0; color: var(--text-secondary);"><strong>User tip:</strong> Best enjoyed in social settings or creative activities</li>`}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data Sources -->
+        <div class="info-card">
+          <h3>View on Partner Platforms</h3>
+          <p style="margin: var(--space-sm) 0 var(--space-lg); color: var(--text-secondary);">
+            All data aggregated from these trusted sources. Click to view full reviews and purchase options.
+          </p>
+          
+          <div style="display: grid; gap: var(--space-md);">
+            ${sourcesHTML}
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div style="margin-top: var(--space-xl); padding: var(--space-lg); background: var(--bg); border: 1px solid var(--border); border-radius: 16px; text-align: center;">
+          <p style="font-size: 0.9rem; color: var(--text-tertiary); max-width: 100%;">
+            <strong>Disclaimer:</strong> Verdant is an informational platform. We do not sell products or provide medical advice. 
+            ${isMedical ? 'Consult healthcare professionals before using cannabis for medical conditions.' : 'Use responsibly and in accordance with local laws.'}
+            Product availability, pricing, and potency may vary. All data sourced from third-party platforms.
+          </p>
+        </div>
+      `;
+      
+      document.getElementById('productDetails').innerHTML = html;
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>

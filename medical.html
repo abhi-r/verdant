@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Products - Verdant</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header id="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Verdant</a>
+      <nav>
+        <ul>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="medical.html" class="active medical-accent">Medical</a></li>
+          <li><a href="recreational.html" class="recreational-accent">Recreational</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding-top: calc(var(--header-height) + var(--space-lg));">
+    <div class="container">
+      <div style="margin-bottom: var(--space-xl);">
+        <h1 class="medical-accent">Medical Cannabis Products</h1>
+        <p style="margin-top: var(--space-sm); color: var(--text-secondary);">CBD-focused therapeutic products for managing medical conditions. All information aggregated from trusted sources.</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container" style="max-width: 100%; margin-bottom: var(--space-lg);">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search by product name, condition, or effect...">
+          <button onclick="applyFilters()">Search</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 300px 1fr; gap: var(--space-lg);">
+        <!-- Filters Sidebar -->
+        <aside>
+          <div class="filters-container">
+            <h3 style="margin-bottom: var(--space-md); font-size: 1.25rem;">Filters</h3>
+            
+            <div class="filter-group">
+              <label>Product Type</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="type" data-value="CBD Oil">CBD Oil</div>
+                <div class="filter-tag" data-filter="type" data-value="CBD Flower">CBD Flower</div>
+                <div class="filter-tag" data-filter="type" data-value="CBD/THC Balanced">Balanced</div>
+                <div class="filter-tag" data-filter="type" data-value="High-CBD">High-CBD</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Format</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="format" data-value="Tincture">Tincture</div>
+                <div class="filter-tag" data-filter="format" data-value="Flower">Flower</div>
+                <div class="filter-tag" data-filter="format" data-value="Capsules">Capsules</div>
+                <div class="filter-tag" data-filter="format" data-value="Oil">Oil</div>
+                <div class="filter-tag" data-filter="format" data-value="Vape Cartridge">Vape</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Medical Conditions</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="conditions" data-value="chronic pain">Chronic Pain</div>
+                <div class="filter-tag" data-filter="conditions" data-value="anxiety">Anxiety</div>
+                <div class="filter-tag" data-filter="conditions" data-value="inflammation">Inflammation</div>
+                <div class="filter-tag" data-filter="conditions" data-value="epilepsy">Epilepsy</div>
+                <div class="filter-tag" data-filter="conditions" data-value="insomnia">Insomnia</div>
+                <div class="filter-tag" data-filter="conditions" data-value="depression">Depression</div>
+                <div class="filter-tag" data-filter="conditions" data-value="migraines">Migraines</div>
+                <div class="filter-tag" data-filter="conditions" data-value="muscle spasms">Muscle Spasms</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Effects</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="effects" data-value="pain relief">Pain Relief</div>
+                <div class="filter-tag" data-filter="effects" data-value="anti-inflammatory">Anti-Inflammatory</div>
+                <div class="filter-tag" data-filter="effects" data-value="relaxation">Relaxation</div>
+                <div class="filter-tag" data-filter="effects" data-value="focus">Focus</div>
+                <div class="filter-tag" data-filter="effects" data-value="anti-anxiety">Anti-Anxiety</div>
+                <div class="filter-tag" data-filter="effects" data-value="sedation">Sedation</div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>CBD Content</label>
+              <div class="filter-tags">
+                <div class="filter-tag" data-filter="cbdRange" data-value="low">Low (0-5%)</div>
+                <div class="filter-tag" data-filter="cbdRange" data-value="medium">Medium (5-15%)</div>
+                <div class="filter-tag" data-filter="cbdRange" data-value="high">High (15%+)</div>
+              </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="clearFilters()" style="width: 100%; margin-top: var(--space-md);">Clear All Filters</button>
+          </div>
+
+          <!-- Info Box -->
+          <div class="info-card" style="margin-top: var(--space-md);">
+            <h4 style="margin-bottom: var(--space-sm);">💡 Medical Use Tip</h4>
+            <p style="font-size: 0.85rem;">Start with low doses and increase gradually. Consult your healthcare provider before using cannabis products for medical conditions.</p>
+          </div>
+        </aside>
+
+        <!-- Products Grid -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+            <div id="resultsCount" style="color: var(--text-secondary); font-size: 0.9rem;">Loading products...</div>
+            <a href="compare.html?category=medical" class="btn btn-secondary">Compare Products</a>
+          </div>
+          
+          <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    let products = [];
+    let activeFilters = {};
+
+    // Initialize page
+    async function init() {
+      const data = await window.verdant.loadProducts();
+      products = data.medical;
+      
+      // Setup event listeners
+      window.verdant.setupFilterTags(activeFilters, applyFilters);
+      window.verdant.setupSearch(activeFilters, applyFilters);
+      
+      // Initial render
+      applyFilters();
+    }
+
+    // Apply filters and render
+    function applyFilters() {
+      const filtered = window.verdant.filterProducts(products, activeFilters);
+      window.verdant.renderProducts(filtered, 'productsGrid', 'medical');
+    }
+
+    // Clear all filters
+    function clearFilters() {
+      activeFilters = {};
+      document.querySelectorAll('.filter-tag.active').forEach(tag => {
+        tag.classList.remove('active');
+      });
+      document.getElementById('searchInput').value = '';
+      applyFilters();
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Start
+    init();
+  </script>
+</body>
+</html>

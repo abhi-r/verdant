@@ -1,0 +1,972 @@
+{
+  "medical": [
+    {
+      "id": "med-001",
+      "name": "Charlotte's Web",
+      "type": "CBD Oil",
+      "thc": "0.3%",
+      "cbd": "17%",
+      "format": "Tincture",
+      "effects": ["pain relief", "anti-inflammatory", "anxiety reduction"],
+      "conditions": ["epilepsy", "chronic pain", "anxiety"],
+      "rating": 4.7,
+      "reviews": 1243,
+      "price": "€45",
+      "image": "placeholder",
+      "description": "High-CBD strain specifically bred for medical use. Known for its therapeutic effects without psychoactive properties.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/charlottes-web", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/CBD/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-002",
+      "name": "ACDC",
+      "type": "CBD Flower",
+      "thc": "0.5%",
+      "cbd": "20%",
+      "format": "Flower",
+      "effects": ["focus", "pain relief", "anti-anxiety"],
+      "conditions": ["chronic pain", "inflammation", "anxiety"],
+      "rating": 4.6,
+      "reviews": 892,
+      "price": "€38",
+      "image": "placeholder",
+      "description": "High-CBD cultivar with minimal psychoactive effects. Ideal for daytime medical use.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/acdc", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/acdc", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-003",
+      "name": "Harlequin",
+      "type": "CBD/THC Balanced",
+      "thc": "5%",
+      "cbd": "10%",
+      "format": "Flower",
+      "effects": ["relaxation", "pain relief", "mental clarity"],
+      "conditions": ["chronic pain", "anxiety", "inflammation"],
+      "rating": 4.5,
+      "reviews": 1056,
+      "price": "€42",
+      "image": "placeholder",
+      "description": "Balanced CBD:THC ratio provides therapeutic benefits with mild psychoactivity.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/harlequin", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/MMJ/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-004",
+      "name": "Cannatonic",
+      "type": "CBD Dominant",
+      "thc": "6%",
+      "cbd": "12%",
+      "format": "Capsules",
+      "effects": ["muscle relaxation", "pain relief", "stress reduction"],
+      "conditions": ["muscle spasms", "migraines", "anxiety"],
+      "rating": 4.4,
+      "reviews": 745,
+      "price": "€50",
+      "image": "placeholder",
+      "description": "Medical strain with consistent CBD levels. Available in precise-dose capsules.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/cannatonic", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/cannatonic", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-005",
+      "name": "Remedy",
+      "thc": "1%",
+      "cbd": "15%",
+      "type": "CBD Oil",
+      "format": "Tincture",
+      "effects": ["pain relief", "anti-inflammatory", "calm"],
+      "conditions": ["arthritis", "chronic pain", "insomnia"],
+      "rating": 4.6,
+      "reviews": 623,
+      "price": "€44",
+      "image": "placeholder",
+      "description": "Nearly THC-free CBD strain ideal for patients avoiding psychoactive effects.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/remedy", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-006",
+      "name": "Ringo's Gift",
+      "thc": "1%",
+      "cbd": "15%",
+      "type": "CBD Flower",
+      "format": "Flower",
+      "effects": ["relaxation", "pain relief", "focus"],
+      "conditions": ["epilepsy", "anxiety", "inflammation"],
+      "rating": 4.7,
+      "reviews": 834,
+      "price": "€46",
+      "image": "placeholder",
+      "description": "Named after CBD pioneer Lawrence Ringo. High-CBD with minimal psychoactivity.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/ringos-gift", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/CBD/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-007",
+      "name": "Stephen Hawking Kush",
+      "thc": "10%",
+      "cbd": "10%",
+      "type": "Balanced Hybrid",
+      "format": "Flower",
+      "effects": ["focus", "creativity", "pain relief"],
+      "conditions": ["chronic pain", "depression", "fatigue"],
+      "rating": 4.5,
+      "reviews": 567,
+      "price": "€48",
+      "image": "placeholder",
+      "description": "1:1 THC:CBD ratio named after the physicist. Cerebral effects with medical benefits.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/stephen-hawking-kush", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-008",
+      "name": "CBD Mango Haze",
+      "thc": "6%",
+      "cbd": "12%",
+      "type": "CBD Sativa",
+      "format": "Vape Cartridge",
+      "effects": ["energy", "focus", "pain relief"],
+      "conditions": ["fatigue", "depression", "chronic pain"],
+      "rating": 4.4,
+      "reviews": 492,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Energizing CBD-dominant sativa for daytime medical use.",
+      "sources": [
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/cbd-mango-haze", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-009",
+      "name": "Pennywise",
+      "thc": "8%",
+      "cbd": "12%",
+      "type": "CBD Indica",
+      "format": "Flower",
+      "effects": ["relaxation", "pain relief", "anti-anxiety"],
+      "conditions": ["anxiety", "chronic pain", "insomnia"],
+      "rating": 4.6,
+      "reviews": 712,
+      "price": "€43",
+      "image": "placeholder",
+      "description": "CBD-rich indica with mild psychoactive effects. Named after Stephen King's character.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/pennywise", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/MMJ/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-010",
+      "name": "Harle-Tsu",
+      "thc": "1%",
+      "cbd": "20%",
+      "type": "High-CBD",
+      "format": "Tincture",
+      "effects": ["pain relief", "anti-inflammatory", "calm"],
+      "conditions": ["chronic pain", "inflammation", "anxiety"],
+      "rating": 4.8,
+      "reviews": 945,
+      "price": "€52",
+      "image": "placeholder",
+      "description": "One of the highest CBD strains available. Minimal psychoactivity with strong therapeutic effects.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/harle-tsu", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/harle-tsu", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-011",
+      "name": "CBD Critical Mass",
+      "thc": "5%",
+      "cbd": "10%",
+      "type": "CBD Indica",
+      "format": "Capsules",
+      "effects": ["sedation", "pain relief", "muscle relaxation"],
+      "conditions": ["insomnia", "chronic pain", "muscle spasms"],
+      "rating": 4.5,
+      "reviews": 534,
+      "price": "€47",
+      "image": "placeholder",
+      "description": "Indica-dominant CBD strain ideal for evening use and sleep disorders.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/cbd-critical-mass", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-012",
+      "name": "Elektra",
+      "thc": "1%",
+      "cbd": "16%",
+      "type": "CBD Hemp",
+      "format": "Flower",
+      "effects": ["focus", "calm", "pain relief"],
+      "conditions": ["anxiety", "inflammation", "chronic pain"],
+      "rating": 4.6,
+      "reviews": 678,
+      "price": "€39",
+      "image": "placeholder",
+      "description": "Hemp-derived CBD flower with complex terpene profile and therapeutic effects.",
+      "sources": [
+        {"name": "Reddit", "url": "https://www.reddit.com/r/hempflowers/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-013",
+      "name": "Sour Tsunami",
+      "thc": "10%",
+      "cbd": "10%",
+      "type": "Balanced Hybrid",
+      "format": "Flower",
+      "effects": ["pain relief", "relaxation", "mental clarity"],
+      "conditions": ["chronic pain", "inflammation", "stress"],
+      "rating": 4.7,
+      "reviews": 823,
+      "price": "€45",
+      "image": "placeholder",
+      "description": "Pioneer CBD strain with balanced cannabinoid profile. Therapeutic without heavy sedation.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/sour-tsunami", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/sour-tsunami", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-014",
+      "name": "CBD Shark",
+      "thc": "5%",
+      "cbd": "9%",
+      "type": "CBD Indica",
+      "format": "Oil",
+      "effects": ["pain relief", "relaxation", "appetite stimulation"],
+      "conditions": ["chronic pain", "nausea", "loss of appetite"],
+      "rating": 4.4,
+      "reviews": 456,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "CBD-rich indica with appetite-stimulating properties. Good for nausea and pain.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/cbd-shark", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "med-015",
+      "name": "Valentine X",
+      "thc": "1%",
+      "cbd": "25%",
+      "type": "High-CBD",
+      "format": "Tincture",
+      "effects": ["pain relief", "anti-inflammatory", "focus"],
+      "conditions": ["epilepsy", "chronic pain", "inflammation"],
+      "rating": 4.8,
+      "reviews": 1067,
+      "price": "€54",
+      "image": "placeholder",
+      "description": "Extremely high CBD content with virtually no psychoactivity. Medical powerhouse.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/valentine-x", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/CBD/", "sentiment": "positive"}
+      ]
+    }
+  ],
+  "recreational": [
+    {
+      "id": "rec-001",
+      "name": "Blue Dream",
+      "slang": ["Blueberry Dream", "BD"],
+      "type": "Sativa Hybrid",
+      "thc": "20%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "creativity", "relaxation"],
+      "mood": ["happy", "uplifted", "creative"],
+      "rating": 4.5,
+      "reviews": 3421,
+      "price": "€35",
+      "image": "placeholder",
+      "description": "California classic. Sweet berry aroma with balanced high - cerebral yet relaxing.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/blue-dream", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/blue-dream", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-002",
+      "name": "OG Kush",
+      "slang": ["OG", "Original Gangster"],
+      "type": "Indica Hybrid",
+      "thc": "23%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "stress relief"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.6,
+      "reviews": 4123,
+      "price": "€38",
+      "image": "placeholder",
+      "description": "Legendary West Coast strain. Earthy pine with fuel notes. Heavy-hitting relaxation.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/og-kush", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/comments/og_kush", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-003",
+      "name": "Girl Scout Cookies",
+      "slang": ["GSC", "Cookies"],
+      "type": "Indica Hybrid",
+      "thc": "25%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "relaxation", "creativity"],
+      "mood": ["happy", "relaxed", "giggly"],
+      "rating": 4.7,
+      "reviews": 5234,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Bay Area favorite. Sweet earthy flavor with powerful euphoric effects. Not for beginners.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/girl-scout-cookies", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/girl-scout-cookies", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-004",
+      "name": "Sour Diesel",
+      "slang": ["Sour D", "East Coast Sour Diesel"],
+      "type": "Sativa",
+      "thc": "22%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["energy", "focus", "creativity"],
+      "mood": ["energized", "uplifted", "focused"],
+      "rating": 4.5,
+      "reviews": 3892,
+      "price": "€37",
+      "image": "placeholder",
+      "description": "Pungent diesel aroma. Fast-acting cerebral high. Perfect for daytime productivity.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/sour-diesel", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-005",
+      "name": "Granddaddy Purple",
+      "slang": ["GDP", "Granddaddy Purps"],
+      "type": "Indica",
+      "thc": "20%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "sedation", "euphoria"],
+      "mood": ["sleepy", "relaxed", "happy"],
+      "rating": 4.6,
+      "reviews": 2934,
+      "price": "€36",
+      "image": "placeholder",
+      "description": "Purple buds with grape aroma. Heavy body high. Excellent evening strain.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/granddaddy-purple", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-006",
+      "name": "Green Crack",
+      "slang": ["Green Cush", "GC"],
+      "type": "Sativa",
+      "thc": "21%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["energy", "focus", "euphoria"],
+      "mood": ["energized", "focused", "creative"],
+      "rating": 4.4,
+      "reviews": 3156,
+      "price": "€34",
+      "image": "placeholder",
+      "description": "Intense focus and energy. Sweet mango flavor. Great for combating fatigue.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/green-crack", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-007",
+      "name": "Gelato",
+      "slang": ["Larry Bird", "Gelato #42"],
+      "type": "Indica Hybrid",
+      "thc": "26%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "relaxation", "creativity"],
+      "mood": ["happy", "relaxed", "uplifted"],
+      "rating": 4.7,
+      "reviews": 4567,
+      "price": "€42",
+      "image": "placeholder",
+      "description": "Dessert strain with sweet citrus flavor. Balanced head and body high. Very potent.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/gelato", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/gelato", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-008",
+      "name": "Wedding Cake",
+      "slang": ["Pink Cookies", "Birthday Cake"],
+      "type": "Indica Hybrid",
+      "thc": "24%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.6,
+      "reviews": 3789,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Sweet vanilla and earthy flavor. Calming full-body effects. Evening favorite.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/wedding-cake", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-009",
+      "name": "Jack Herer",
+      "slang": ["JH", "The Jack", "Premium Jack"],
+      "type": "Sativa Hybrid",
+      "thc": "23%",
+      "cbd": "0.3%",
+      "format": "Flower",
+      "effects": ["creativity", "energy", "focus"],
+      "mood": ["uplifted", "energized", "creative"],
+      "rating": 4.5,
+      "reviews": 4234,
+      "price": "€39",
+      "image": "placeholder",
+      "description": "Named after cannabis activist. Spicy pine aroma. Clear-headed cerebral effects.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/jack-herer", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-010",
+      "name": "Northern Lights",
+      "slang": ["NL"],
+      "type": "Indica",
+      "thc": "18%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "sedation", "euphoria"],
+      "mood": ["relaxed", "sleepy", "happy"],
+      "rating": 4.7,
+      "reviews": 3567,
+      "price": "€36",
+      "image": "placeholder",
+      "description": "Classic indica. Sweet spicy aroma. Fast-acting body relaxation. Sleep-inducing.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/northern-lights", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/northern-lights", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-011",
+      "name": "Pineapple Express",
+      "slang": ["PE"],
+      "type": "Sativa Hybrid",
+      "thc": "24%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["energy", "creativity", "euphoria"],
+      "mood": ["energized", "happy", "creative"],
+      "rating": 4.4,
+      "reviews": 2891,
+      "price": "€38",
+      "image": "placeholder",
+      "description": "Tropical flavor. Long-lasting energetic high. Made famous by the film.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/pineapple-express", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-012",
+      "name": "Zkittlez",
+      "slang": ["Skittles", "Skittlz"],
+      "type": "Indica Hybrid",
+      "thc": "23%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "happiness"],
+      "mood": ["relaxed", "happy", "uplifted"],
+      "rating": 4.6,
+      "reviews": 3234,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Candy-like fruity flavor. Calming euphoric effects. Award-winning strain.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/zkittlez", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-013",
+      "name": "White Widow",
+      "slang": ["WW"],
+      "type": "Balanced Hybrid",
+      "thc": "20%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["euphoria", "energy", "creativity"],
+      "mood": ["energized", "creative", "happy"],
+      "rating": 4.5,
+      "reviews": 4123,
+      "price": "€35",
+      "image": "placeholder",
+      "description": "Dutch classic from the 90s. White resin-coated buds. Balanced energetic high.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/white-widow", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/white-widow", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-014",
+      "name": "Durban Poison",
+      "slang": ["Durban"],
+      "type": "Sativa",
+      "thc": "24%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["energy", "focus", "creativity"],
+      "mood": ["energized", "focused", "uplifted"],
+      "rating": 4.6,
+      "reviews": 2678,
+      "price": "€37",
+      "image": "placeholder",
+      "description": "Pure African sativa. Sweet anise flavor. Clear-headed cerebral high.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/durban-poison", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-015",
+      "name": "Gorilla Glue #4",
+      "slang": ["GG4", "Original Glue"],
+      "type": "Indica Hybrid",
+      "thc": "28%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "relaxation", "sedation"],
+      "mood": ["happy", "relaxed", "sleepy"],
+      "rating": 4.8,
+      "reviews": 5123,
+      "price": "€43",
+      "image": "placeholder",
+      "description": "Extremely potent. Pungent earthy aroma. Heavy couch-lock effects. Not for beginners.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/gorilla-glue-4", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-016",
+      "name": "Strawberry Cough",
+      "slang": ["Strawberry"],
+      "type": "Sativa",
+      "thc": "22%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["energy", "creativity", "euphoria"],
+      "mood": ["uplifted", "creative", "happy"],
+      "rating": 4.4,
+      "reviews": 2345,
+      "price": "€36",
+      "image": "placeholder",
+      "description": "Sweet strawberry aroma. Uplifting social high. May cause coughing.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/strawberry-cough", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-017",
+      "name": "Purple Punch",
+      "slang": ["PP"],
+      "type": "Indica",
+      "thc": "25%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "sedation", "euphoria"],
+      "mood": ["sleepy", "relaxed", "happy"],
+      "rating": 4.7,
+      "reviews": 3456,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Sweet grape candy flavor. Powerful sedating effects. Perfect nightcap.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/purple-punch", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/purple-punch", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-018",
+      "name": "Super Lemon Haze",
+      "slang": ["SLH", "Lemon Haze"],
+      "type": "Sativa",
+      "thc": "23%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["energy", "euphoria", "creativity"],
+      "mood": ["energized", "uplifted", "happy"],
+      "rating": 4.5,
+      "reviews": 3789,
+      "price": "€38",
+      "image": "placeholder",
+      "description": "Citrus burst flavor. Energizing cerebral high. Multiple Cannabis Cup winner.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/super-lemon-haze", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-019",
+      "name": "Sunset Sherbet",
+      "slang": ["Sherbert", "Sunset"],
+      "type": "Indica Hybrid",
+      "thc": "24%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "creativity"],
+      "mood": ["relaxed", "happy", "creative"],
+      "rating": 4.6,
+      "reviews": 2891,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Sweet fruity flavor. Stress-relieving full-body relaxation. Cookies family genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/sunset-sherbet", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-020",
+      "name": "Tangie",
+      "slang": ["Tangerine Dream"],
+      "type": "Sativa",
+      "thc": "22%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["energy", "creativity", "euphoria"],
+      "mood": ["uplifted", "creative", "energized"],
+      "rating": 4.5,
+      "reviews": 3123,
+      "price": "€37",
+      "image": "placeholder",
+      "description": "Strong tangerine aroma. Uplifting cerebral effects. Great for daytime use.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/tangie", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-021",
+      "name": "Trainwreck",
+      "slang": ["Wreck"],
+      "type": "Sativa Hybrid",
+      "thc": "21%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["euphoria", "energy", "creativity"],
+      "mood": ["happy", "uplifted", "energized"],
+      "rating": 4.4,
+      "reviews": 2567,
+      "price": "€36",
+      "image": "placeholder",
+      "description": "Lemon pine aroma. Fast-hitting cerebral rush. Long-lasting effects.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/trainwreck", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/trainwreck", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-022",
+      "name": "Do-Si-Dos",
+      "slang": ["Dosi", "Dosidos"],
+      "type": "Indica Hybrid",
+      "thc": "26%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.7,
+      "reviews": 3345,
+      "price": "€42",
+      "image": "placeholder",
+      "description": "Sweet earthy flavor. Potent full-body relaxation. GSC lineage.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/do-si-dos", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-023",
+      "name": "Mimosa",
+      "slang": ["Mimosa Evo", "Purple Mimosa"],
+      "type": "Sativa Hybrid",
+      "thc": "27%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["energy", "euphoria", "creativity"],
+      "mood": ["uplifted", "happy", "energized"],
+      "rating": 4.6,
+      "reviews": 2978,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Citrus flavor like the cocktail. Uplifting energetic high. Great wake-and-bake strain.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/mimosa", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-024",
+      "name": "Runtz",
+      "slang": ["White Runtz", "Pink Runtz"],
+      "type": "Balanced Hybrid",
+      "thc": "29%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "relaxation", "creativity"],
+      "mood": "happy", "relaxed", "uplifted"],
+      "rating": 4.8,
+      "reviews": 4234,
+      "price": "€44",
+      "image": "placeholder",
+      "description": "Candy-like fruity flavor. Balanced euphoric high. Instagram-famous strain.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/runtz", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/runtz", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-025",
+      "name": "Cereal Milk",
+      "slang": ["CM"],
+      "type": "Indica Hybrid",
+      "thc": "23%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "creativity"],
+      "mood": ["relaxed", "happy", "creative"],
+      "rating": 4.5,
+      "reviews": 2456,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Sweet creamy flavor. Balanced relaxing high. From Cookies genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/cereal-milk", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-026",
+      "name": "Biscotti",
+      "slang": ["Biscotti Cookies"],
+      "type": "Indica Hybrid",
+      "thc": "25%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.6,
+      "reviews": 2789,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Sweet nutty flavor. Calming effects. Cookies x Gelato genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/biscotti", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-027",
+      "name": "Lava Cake",
+      "slang": ["Lava"],
+      "type": "Indica Hybrid",
+      "thc": "24%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.5,
+      "reviews": 2123,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Sweet chocolate flavor. Heavy body high. Perfect for evening relaxation.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/lava-cake", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-028",
+      "name": "MAC",
+      "slang": ["Miracle Alien Cookies", "MAC1"],
+      "type": "Balanced Hybrid",
+      "thc": "23%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "creativity", "relaxation"],
+      "mood": ["happy", "uplifted", "relaxed"],
+      "rating": 4.7,
+      "reviews": 3456,
+      "price": "€42",
+      "image": "placeholder",
+      "description": "Creamy citrus flavor. Balanced cerebral and body effects. Capulator's creation.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/mac", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/mac", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-029",
+      "name": "Ice Cream Cake",
+      "slang": ["ICC"],
+      "type": "Indica Hybrid",
+      "thc": "25%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.6,
+      "reviews": 3234,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Sweet vanilla flavor. Potent relaxing effects. Wedding Cake x Gelato #33.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/ice-cream-cake", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-030",
+      "name": "Jealousy",
+      "slang": ["Jealousy OG"],
+      "type": "Balanced Hybrid",
+      "thc": "28%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "creativity", "relaxation"],
+      "mood": ["happy", "creative", "relaxed"],
+      "rating": 4.7,
+      "reviews": 2567,
+      "price": "€43",
+      "image": "placeholder",
+      "description": "Fruity earthy flavor. Balanced high. Gelato #41 x Sherbert genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/jealousy", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-031",
+      "name": "Apples and Bananas",
+      "slang": ["A&B"],
+      "type": "Indica Hybrid",
+      "thc": "26%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "creativity"],
+      "mood": ["relaxed", "happy", "creative"],
+      "rating": 4.6,
+      "reviews": 2234,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Sweet fruity flavor. Relaxing yet creative high. Cookies genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/apples-and-bananas", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-032",
+      "name": "London Pound Cake",
+      "slang": ["LPC", "Pound Cake"],
+      "type": "Indica Hybrid",
+      "thc": "24%",
+      "cbd": "0.2%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.5,
+      "reviews": 2678,
+      "price": "€40",
+      "image": "placeholder",
+      "description": "Sweet berry flavor. Calming body high. Sunset Sherbet genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/london-pound-cake", "sentiment": "positive"},
+        {"name": "Weedmaps", "url": "https://weedmaps.com/strains/london-pound-cake", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-033",
+      "name": "Gary Payton",
+      "slang": ["GP"],
+      "type": "Balanced Hybrid",
+      "thc": "25%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["euphoria", "energy", "creativity"],
+      "mood": ["happy", "uplifted", "energized"],
+      "rating": 4.7,
+      "reviews": 3123,
+      "price": "€42",
+      "image": "placeholder",
+      "description": "Diesel and herbal flavor. Balanced energetic high. Named after NBA legend.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/gary-payton", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-034",
+      "name": "Candy Rain",
+      "slang": ["Candy"],
+      "type": "Indica Hybrid",
+      "thc": "23%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "happiness"],
+      "mood": ["relaxed", "happy", "uplifted"],
+      "rating": 4.5,
+      "reviews": 1987,
+      "price": "€39",
+      "image": "placeholder",
+      "description": "Sweet candy flavor. Relaxing body effects. London Pound Cake genetics.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/candy-rain", "sentiment": "positive"},
+        {"name": "Reddit", "url": "https://www.reddit.com/r/trees/", "sentiment": "positive"}
+      ]
+    },
+    {
+      "id": "rec-035",
+      "name": "Slurricane",
+      "slang": ["Slurri"],
+      "type": "Indica Hybrid",
+      "thc": "27%",
+      "cbd": "0.1%",
+      "format": "Flower",
+      "effects": ["relaxation", "euphoria", "sedation"],
+      "mood": ["relaxed", "happy", "sleepy"],
+      "rating": 4.6,
+      "reviews": 2456,
+      "price": "€41",
+      "image": "placeholder",
+      "description": "Fruity berry flavor. Powerful sedating effects. Purple Punch x Do-Si-Dos.",
+      "sources": [
+        {"name": "Leafly", "url": "https://www.leafly.com/strains/slurricane", "sentiment": "positive"}
+      ]
+    }
+  ]
+}

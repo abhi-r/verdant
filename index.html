@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verdant - Cannabis Discovery Platform</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header id="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Verdant</a>
+      <nav>
+        <ul>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="medical.html" class="medical-accent">Medical</a></li>
+          <li><a href="recreational.html" class="recreational-accent">Recreational</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Discover Cannabis<br>with Clarity</h1>
+        <p>Evidence-based product discovery for medical and recreational use.<br>Aggregated data, transparent sources, informed decisions.</p>
+        
+        <div class="search-container">
+          <div class="search-bar">
+            <input type="text" id="heroSearch" placeholder="Search by strain, effect, or condition...">
+            <button onclick="performSearch()">Search</button>
+          </div>
+        </div>
+
+        <div class="path-cards">
+          <a href="learn.html" class="path-card">
+            <div class="path-icon">📚</div>
+            <h3>Learn</h3>
+            <p>Understand cannabinoids, consumption methods, safety guidelines, and everything you need to know before you start.</p>
+          </a>
+
+          <a href="medical.html" class="path-card medical">
+            <div class="path-icon">⚕️</div>
+            <h3>Medical</h3>
+            <p>CBD-focused products for therapeutic use. Research-backed data on treating conditions like chronic pain, anxiety, and inflammation.</p>
+          </a>
+
+          <a href="recreational.html" class="path-card recreational">
+            <div class="path-icon">🌿</div>
+            <h3>Recreational</h3>
+            <p>THC products for personal enjoyment. Curated information on effects, potency, and user experiences from verified sources.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-xl">
+          <h2>How Verdant Works</h2>
+          <p style="margin: var(--space-md) auto;">We aggregate data from trusted sources so you don't have to.</p>
+        </div>
+
+        <div class="path-cards">
+          <div class="info-card">
+            <h3>🔍 Comprehensive Aggregation</h3>
+            <p>We collect product information, reviews, and user experiences from Leafly, Weedmaps, Reddit communities, and other trusted platforms. All sources are cited and linked.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>🎯 Smart Filtering</h3>
+            <p>Search by specific effects, medical conditions, THC/CBD ratios, consumption formats, and more. Find exactly what matches your needs.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>📊 Transparent Data</h3>
+            <p>See aggregated ratings, sentiment analysis, and direct links to original sources. Make informed decisions based on real experiences.</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-xl">
+          <p style="color: var(--text-tertiary); font-size: 0.9rem;">
+            Verdant is an informational platform. We do not sell products or provide medical advice.<br>
+            Always consult healthcare professionals for medical guidance.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Search functionality
+    function performSearch() {
+      const searchTerm = document.getElementById('heroSearch').value.toLowerCase();
+      
+      // Determine if search is more medical or recreational
+      const medicalTerms = ['cbd', 'pain', 'anxiety', 'inflammation', 'medical', 'therapeutic', 'epilepsy'];
+      const isMedical = medicalTerms.some(term => searchTerm.includes(term));
+      
+      // Redirect to appropriate page with search parameter
+      const targetPage = isMedical ? 'medical.html' : 'recreational.html';
+      window.location.href = `${targetPage}?q=${encodeURIComponent(searchTerm)}`;
+    }
+
+    // Allow Enter key to search
+    document.getElementById('heroSearch').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Products - Verdant</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header id="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Verdant</a>
+      <nav>
+        <ul>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="medical.html" class="medical-accent">Medical</a></li>
+          <li><a href="recreational.html" class="recreational-accent">Recreational</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding-top: calc(var(--header-height) + var(--space-lg));">
+    <div class="container">
+      <div style="margin-bottom: var(--space-xl);">
+        <h1>Compare Products</h1>
+        <p style="margin-top: var(--space-sm); color: var(--text-secondary);">Select up to 3 products to compare side-by-side.</p>
+      </div>
+
+      <!-- Search to add products -->
+      <div class="search-container" style="max-width: 100%; margin-bottom: var(--space-lg);">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search for products to compare...">
+          <button onclick="searchProducts()">Search</button>
+        </div>
+      </div>
+
+      <!-- Search results -->
+      <div id="searchResults" class="products-grid" style="margin-bottom: var(--space-xl); display: none;">
+        <!-- Search results will appear here -->
+      </div>
+
+      <!-- Selected products for comparison -->
+      <div id="comparisonContainer">
+        <div style="text-align: center; padding: var(--space-xl); color: var(--text-tertiary);">
+          <h3>No products selected yet</h3>
+          <p style="margin-top: var(--space-sm);">Search and click on products to add them to comparison</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    let allProducts = [];
+    let selectedProducts = [];
+    let category = '';
+
+    async function init() {
+      const urlParams = new URLSearchParams(window.location.search);
+      category = urlParams.get('category') || 'recreational';
+      
+      const data = await window.verdant.loadProducts();
+      allProducts = data[category];
+    }
+
+    function searchProducts() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      if (searchTerm.length < 2) return;
+
+      const filtered = allProducts.filter(p => {
+        const matchesName = p.name.toLowerCase().includes(searchTerm);
+        const matchesType = p.type.toLowerCase().includes(searchTerm);
+        const matchesEffects = p.effects?.some(e => e.toLowerCase().includes(searchTerm));
+        return matchesName || matchesType || matchesEffects;
+      }).slice(0, 12);
+
+      renderSearchResults(filtered);
+    }
+
+    function renderSearchResults(products) {
+      const container = document.getElementById('searchResults');
+      
+      if (products.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+
+      container.style.display = 'grid';
+      container.innerHTML = products.map(product => `
+        <div class="product-card" onclick="addToComparison('${product.id}')" style="cursor: pointer;">
+          <div class="product-image">🌿</div>
+          <div class="product-info">
+            <div class="product-type">${product.type}</div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-meta">
+              <span>THC: ${product.thc}</span>
+              <span>CBD: ${product.cbd}</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <div class="product-rating">
+              <span>⭐</span>
+              <span>${product.rating}</span>
+            </div>
+            <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="event.stopPropagation(); addToComparison('${product.id}')">
+              Add to Compare
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToComparison(productId) {
+      if (selectedProducts.length >= 3) {
+        alert('You can compare up to 3 products at a time');
+        return;
+      }
+
+      const product = allProducts.find(p => p.id === productId);
+      if (!product || selectedProducts.find(p => p.id === productId)) return;
+
+      selectedProducts.push(product);
+      renderComparison();
+    }
+
+    function removeFromComparison(productId) {
+      selectedProducts = selectedProducts.filter(p => p.id !== productId);
+      renderComparison();
+    }
+
+    function renderComparison() {
+      const container = document.getElementById('comparisonContainer');
+      
+      if (selectedProducts.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: var(--space-xl); color: var(--text-tertiary);">
+            <h3>No products selected yet</h3>
+            <p style="margin-top: var(--space-sm);">Search and click on products to add them to comparison</p>
+          </div>
+        `;
+        return;
+      }
+
+      const isMedical = category === 'medical';
+      const accentColor = isMedical ? 'var(--medical)' : 'var(--recreational)';
+
+      const html = `
+        <div style="display: grid; grid-template-columns: repeat(${selectedProducts.length}, 1fr); gap: var(--space-lg);">
+          ${selectedProducts.map(product => `
+            <div class="comparison-card selected">
+              <button onclick="removeFromComparison('${product.id}')" 
+                      style="position: absolute; top: 12px; right: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-secondary);"
+                      onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';"
+                      onmouseout="this.style.background='var(--bg)'; this.style.color='var(--text-secondary)'; this.style.borderColor='var(--border)';">
+                ×
+              </button>
+              
+              <div style="text-align: center; margin-bottom: var(--space-md);">
+                <div style="width: 120px; height: 120px; margin: 0 auto var(--space-md); background: linear-gradient(135deg, var(--bg) 0%, var(--border-light) 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 1px solid var(--border);">
+                  🌿
+                </div>
+                <h3 style="margin-bottom: var(--space-xs); font-size: 1.25rem;">${product.name}</h3>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">${product.type}</div>
+              </div>
+
+              <div style="display: grid; gap: var(--space-md);">
+                <div style="padding: var(--space-sm); background: var(--bg); border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Rating</div>
+                  <div style="font-size: 1.25rem; font-weight: 700; color: ${accentColor};">${product.rating} ⭐</div>
+                  <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 2px;">${window.verdant.formatNumber(product.reviews)} reviews</div>
+                </div>
+
+                <div style="padding: var(--space-sm); background: var(--bg); border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Cannabinoids</div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); margin-top: var(--space-xs);">
+                    <div>
+                      <div style="font-size: 0.75rem; color: var(--text-secondary);">THC</div>
+                      <div style="font-size: 1.1rem; font-weight: 700;">${product.thc}</div>
+                    </div>
+                    <div>
+                      <div style="font-size: 0.75rem; color: var(--text-secondary);">CBD</div>
+                      <div style="font-size: 1.1rem; font-weight: 700;">${product.cbd}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: var(--space-sm); background: var(--bg); border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Format</div>
+                  <div style="font-weight: 600;">${product.format}</div>
+                </div>
+
+                <div style="padding: var(--space-sm); background: var(--bg); border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">${isMedical ? 'Effects' : 'Effects & Mood'}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: var(--space-xs);">
+                    ${(isMedical ? product.effects : [...(product.effects || []), ...(product.mood || [])]).slice(0, 4).map(e => 
+                      `<span style="display: inline-block; padding: 4px 8px; background: white; border: 1px solid var(--border); border-radius: 12px; font-size: 0.75rem;">${e}</span>`
+                    ).join('')}
+                  </div>
+                </div>
+
+                ${isMedical && product.conditions ? `
+                  <div style="padding: var(--space-sm); background: rgba(107, 142, 158, 0.05); border-radius: 8px; border: 1px solid var(--medical);">
+                    <div style="font-size: 0.75rem; color: var(--medical); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Conditions</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: var(--space-xs);">
+                      ${product.conditions.slice(0, 3).map(c => 
+                        `<span style="display: inline-block; padding: 4px 8px; background: white; border-radius: 12px; font-size: 0.75rem;">${c}</span>`
+                      ).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+
+                <div style="padding: var(--space-sm); background: var(--bg); border-radius: 8px;">
+                  <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">Price</div>
+                  <div style="font-size: 1.5rem; font-weight: 700; color: ${accentColor};">${product.price}</div>
+                </div>
+              </div>
+
+              <div style="margin-top: var(--space-md);">
+                <a href="product.html?id=${product.id}&category=${category}" class="btn btn-primary" style="width: 100%; display: block; text-align: center;">
+                  View Full Details
+                </a>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        ${selectedProducts.length < 3 ? `
+          <div style="margin-top: var(--space-lg); text-align: center; padding: var(--space-md); background: var(--bg); border-radius: 12px;">
+            <p style="color: var(--text-secondary);">You can add ${3 - selectedProducts.length} more product${selectedProducts.length === 2 ? '' : 's'} to compare</p>
+          </div>
+        ` : ''}
+      `;
+
+      container.innerHTML = html;
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Allow Enter key to search
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        searchProducts();
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>
