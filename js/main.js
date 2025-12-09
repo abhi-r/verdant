@@ -1,5 +1,27 @@
 // Verdant - Product Discovery JavaScript
 
+// Application Version Configuration
+const APP_VERSION = {
+  version: '0.1.0',
+  timestamp: '2024-12-09 14:35',
+  get full() {
+    return `v${this.version} · ${this.timestamp}`;
+  }
+};
+
+// Update version in header on page load
+function updateVersionDisplay() {
+  const versionElements = document.querySelectorAll('.logo-version');
+  versionElements.forEach(el => {
+    el.textContent = APP_VERSION.full;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateVersionDisplay();
+  setActiveNav();
+});
+
 // Set active navigation link based on current page
 function setActiveNav() {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
