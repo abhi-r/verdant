@@ -28,6 +28,61 @@
     </div>
   </main>
 
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About</h3>
+          <ul>
+            <li><a href="#about">About Verdant</a></li>
+            <li><a href="#mission">Our Mission</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="learn.html">Learning Hub</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#glossary">Glossary</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="#twitter">Twitter</a></li>
+            <li><a href="#reddit">Reddit</a></li>
+            <li><a href="#discord">Discord</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a href="#cookies">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2024 Verdant. All rights reserved. Informational platform only.</p>
+        <div class="footer-legal">
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+          <a href="#disclaimer">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="js/main.js"></script>
   <script>
     let product = null;
@@ -54,6 +109,7 @@
       }
 
       renderProductDetail();
+      checkComparisonStatus();
     }
 
     function renderProductDetail() {
@@ -170,8 +226,8 @@
               <a href="compare.html?category=${category}" class="btn btn-primary" style="flex: 1; text-align: center;">
                 Compare Products
               </a>
-              <button onclick="addToCompare('${product.id}', '${category}')" class="btn" style="flex: 1; background: var(--bg); border: 1px solid var(--border); cursor: pointer;">
-                Add to Compare
+              <button id="addCompareBtn" onclick="addToCompare('${product.id}', '${category}')" class="btn btn-add-compare" style="flex: 1; position: relative;">
+                <span class="btn-text">Add to Compare</span>
               </button>
             </div>
           </div>
@@ -253,6 +309,8 @@
 
     // Add product to comparison
     function addToCompare(productId, cat) {
+      const btn = document.getElementById('addCompareBtn');
+
       // Get existing comparison data from localStorage
       const comparisonData = JSON.parse(localStorage.getItem('comparisonData')) || {
         category: cat,
@@ -260,14 +318,26 @@
       };
 
       // Only allow same category comparisons
-      if (comparisonData.category !== cat) {
+      if (comparisonData.category !== cat && comparisonData.products.length > 0) {
         alert('You can only compare products from the same category');
         return;
       }
 
       // Check if product already in comparison
       if (comparisonData.products.includes(productId)) {
-        alert('This product is already in your comparison');
+        // Remove from comparison
+        comparisonData.products = comparisonData.products.filter(id => id !== productId);
+        if (comparisonData.products.length === 0) {
+          localStorage.removeItem('comparisonData');
+        } else {
+          localStorage.setItem('comparisonData', JSON.stringify(comparisonData));
+        }
+
+        // Reset button state
+        if (btn) {
+          btn.classList.remove('added');
+          btn.querySelector('.btn-text').textContent = 'Add to Compare';
+        }
         return;
       }
 
@@ -277,10 +347,30 @@
         return;
       }
 
-      // Add product and navigate to compare page
+      // Add product
       comparisonData.products.push(productId);
+      comparisonData.category = cat;
       localStorage.setItem('comparisonData', JSON.stringify(comparisonData));
-      window.location.href = `compare.html?category=${cat}`;
+
+      // Animate button change
+      if (btn) {
+        btn.classList.add('added');
+        setTimeout(() => {
+          btn.querySelector('.btn-text').textContent = 'Remove from comparison';
+        }, 100);
+      }
+    }
+
+    // Check if product is already in comparison on page load
+    function checkComparisonStatus() {
+      const btn = document.getElementById('addCompareBtn');
+      if (!btn || !product) return;
+
+      const comparisonData = JSON.parse(localStorage.getItem('comparisonData'));
+      if (comparisonData && comparisonData.products && comparisonData.products.includes(product.id)) {
+        btn.classList.add('added');
+        btn.querySelector('.btn-text').textContent = 'Remove from comparison';
+      }
     }
 
     // Header scroll effect

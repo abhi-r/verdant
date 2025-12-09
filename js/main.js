@@ -1,5 +1,24 @@
 // Verdant - Product Discovery JavaScript
 
+// Set active navigation link based on current page
+function setActiveNav() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('nav a');
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+
+    const href = link.getAttribute('href');
+    // Check if the link matches the current page
+    if (href && (href === currentPage || (currentPage === '' && href === 'index.html'))) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', setActiveNav);
+
 // Load product data
 let allProducts = { medical: [], recreational: [] };
 

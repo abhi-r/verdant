@@ -50,6 +50,61 @@
     </div>
   </main>
 
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About</h3>
+          <ul>
+            <li><a href="#about">About Verdant</a></li>
+            <li><a href="#mission">Our Mission</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="learn.html">Learning Hub</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#glossary">Glossary</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="#twitter">Twitter</a></li>
+            <li><a href="#reddit">Reddit</a></li>
+            <li><a href="#discord">Discord</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a href="#cookies">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2024 Verdant. All rights reserved. Informational platform only.</p>
+        <div class="footer-legal">
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+          <a href="#disclaimer">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="js/main.js"></script>
   <script>
     let allProducts = [];
@@ -144,8 +199,8 @@
       if (selectedProducts.length === 0) {
         container.innerHTML = `
           <div style="text-align: center; padding: var(--space-xl); color: var(--text-tertiary);">
-            <h3>No products selected yet</h3>
-            <p style="margin-top: var(--space-sm);">Search and click on products to add them to comparison</p>
+            <h3 style="margin: 0 0 var(--space-sm) 0;">No products selected yet</h3>
+            <p style="margin: 0;">Search and click on products to add them to comparison</p>
           </div>
         `;
         return;

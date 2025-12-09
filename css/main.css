@@ -167,12 +167,13 @@ nav a {
   color: var(--text);
   transition: var(--transition);
   position: relative;
+  padding-bottom: 6px;
 }
 
 nav a::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
@@ -180,9 +181,19 @@ nav a::after {
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-nav a:hover::after,
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
 nav a.active::after {
   width: 100%;
+  background: var(--primary);
+  height: 3px;
 }
 
 /* Hero Section */
@@ -850,6 +861,68 @@ nav a.active::after {
   background: rgba(95, 122, 97, 0.05);
 }
 
+/* Add to Compare Button */
+.btn-add-compare {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-add-compare:hover {
+  border-color: var(--primary);
+  background: rgba(95, 122, 97, 0.05);
+  transform: translateY(-2px);
+}
+
+.btn-add-compare.added {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-add-compare.added:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-add-compare .btn-text {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-add-compare.added .btn-text {
+  animation: slideOut 0.2s ease forwards;
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.btn-add-compare.added .btn-text::after {
+  content: 'Remove from comparison';
+  position: absolute;
+  animation: slideIn 0.2s ease 0.1s forwards;
+  opacity: 0;
+}
+
 /* Educational Content */
 .info-card {
   background: var(--surface);
@@ -1125,4 +1198,106 @@ nav a.active::after {
 
 .recreational-accent {
   color: var(--recreational);
+}
+
+/* Footer */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-xl);
+  padding: var(--space-xl) 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section h3 {
+  font-size: 1rem;
+  margin-bottom: var(--space-md);
+  color: var(--text);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: var(--space-sm);
+}
+
+.footer-section a {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.footer-section a:hover {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.footer-copyright {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+
+.footer-legal {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.footer-legal a {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.footer-legal a:hover {
+  color: var(--text-secondary);
+  transform: none;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  footer {
+    margin-top: var(--space-lg);
+    padding: var(--space-lg) 0;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-legal {
+    gap: var(--space-md);
+    font-size: 0.75rem;
+  }
 }
