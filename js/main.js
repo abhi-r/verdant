@@ -165,11 +165,11 @@ function setupFilterTags(activeFilters, applyFiltersCallback) {
   });
 }
 
-// Handle search input
-function setupSearch(activeFilters, applyFiltersCallback) {
+// Handle search input with autosuggest
+function setupSearch(activeFilters, applyFiltersCallback, products = null, category = null) {
   const searchInput = document.getElementById('searchInput');
   if (!searchInput) return;
-  
+
   // Check for URL search parameter
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get('q');
@@ -177,17 +177,110 @@ function setupSearch(activeFilters, applyFiltersCallback) {
     searchInput.value = searchQuery;
     activeFilters.search = searchQuery;
   }
-  
+
   searchInput.addEventListener('input', (e) => {
     activeFilters.search = e.target.value;
+    if (products) {
+      updateAutosuggest(searchInput, products, category);
+    }
     applyFiltersCallback();
   });
-  
+
   searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       applyFiltersCallback();
+      closeAutosuggest(searchInput);
     }
   });
+
+  searchInput.addEventListener('focus', (e) => {
+    if (products && e.target.value.length > 0) {
+      updateAutosuggest(searchInput, products, category);
+    }
+  });
+
+  // Close autosuggest when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container')) {
+      closeAutosuggest(searchInput);
+    }
+  });
+}
+
+// Update autosuggest dropdown
+function updateAutosuggest(searchInput, products, category) {
+  const searchValue = searchInput.value.toLowerCase();
+  let dropdown = document.getElementById('autosuggestDropdown');
+
+  // Create dropdown if it doesn't exist
+  if (!dropdown) {
+    dropdown = document.createElement('div');
+    dropdown.id = 'autosuggestDropdown';
+    dropdown.className = 'autosuggest-dropdown';
+    searchInput.closest('.search-container').appendChild(dropdown);
+  }
+
+  // Hide if search is empty
+  if (searchValue.length === 0) {
+    dropdown.classList.remove('active');
+    return;
+  }
+
+  // Filter products based on search input
+  const suggestions = products.filter(product => {
+    const name = product.name.toLowerCase();
+    const type = product.type.toLowerCase();
+    const effects = (product.effects || []).map(e => e.toLowerCase());
+    const mood = (product.mood || []).map(m => m.toLowerCase());
+    const conditions = (product.conditions || []).map(c => c.toLowerCase());
+    const slang = (product.slang || []).map(s => s.toLowerCase());
+
+    return (
+      name.includes(searchValue) ||
+      type.includes(searchValue) ||
+      effects.some(e => e.includes(searchValue)) ||
+      mood.some(m => m.includes(searchValue)) ||
+      conditions.some(c => c.includes(searchValue)) ||
+      slang.some(s => s.includes(searchValue))
+    );
+  }).slice(0, 8); // Limit to 8 suggestions
+
+  // Render suggestions
+  if (suggestions.length === 0) {
+    dropdown.innerHTML = `<div class="autosuggest-no-results">No products found</div>`;
+  } else {
+    dropdown.innerHTML = suggestions.map(product => `
+      <div class="autosuggest-item" onclick="selectSuggestion('${product.name}', '${product.id}', '${category}')">
+        <div class="autosuggest-item-icon">🌿</div>
+        <div class="autosuggest-item-content">
+          <div class="autosuggest-item-name">${product.name}</div>
+          <div class="autosuggest-item-meta">${product.type}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  dropdown.classList.add('active');
+}
+
+// Close autosuggest dropdown
+function closeAutosuggest(searchInput) {
+  const dropdown = document.getElementById('autosuggestDropdown');
+  if (dropdown) {
+    dropdown.classList.remove('active');
+  }
+}
+
+// Handle suggestion selection
+function selectSuggestion(productName, productId, category) {
+  const searchInput = document.getElementById('searchInput') || document.getElementById('heroSearch');
+  if (searchInput) {
+    searchInput.value = productName;
+  }
+  closeAutosuggest(searchInput);
+
+  // Navigate to product detail page
+  window.location.href = `product.html?id=${productId}&category=${category}`;
 }
 
 // Navigate to product detail page

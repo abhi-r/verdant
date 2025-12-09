@@ -31,6 +31,7 @@
             <input type="text" id="heroSearch" placeholder="Search by strain, effect, or condition...">
             <button onclick="performSearch()">Search</button>
           </div>
+          <!-- Autosuggest dropdown will be inserted here -->
         </div>
 
         <div class="path-cards">
@@ -89,7 +90,108 @@
     </section>
   </main>
 
+  <script src="js/main.js"></script>
   <script>
+    let heroProducts = { medical: [], recreational: [] };
+
+    // Load and setup hero search autosuggest
+    async function initHeroSearch() {
+      heroProducts = await window.verdant.loadProducts();
+      const heroSearchInput = document.getElementById('heroSearch');
+
+      heroSearchInput.addEventListener('input', (e) => {
+        updateHeroAutosuggest(e.target);
+      });
+
+      heroSearchInput.addEventListener('focus', (e) => {
+        if (e.target.value.length > 0) {
+          updateHeroAutosuggest(e.target);
+        }
+      });
+
+      heroSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          performSearch();
+          closeAutosuggest(heroSearchInput);
+        }
+      });
+
+      // Close autosuggest when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+          closeAutosuggest(heroSearchInput);
+        }
+      });
+    }
+
+    // Update hero search autosuggest
+    function updateHeroAutosuggest(searchInput) {
+      const searchValue = searchInput.value.toLowerCase();
+      let dropdown = document.getElementById('autosuggestDropdown');
+
+      // Create dropdown if it doesn't exist
+      if (!dropdown) {
+        dropdown = document.createElement('div');
+        dropdown.id = 'autosuggestDropdown';
+        dropdown.className = 'autosuggest-dropdown';
+        searchInput.closest('.search-container').appendChild(dropdown);
+      }
+
+      // Hide if search is empty
+      if (searchValue.length === 0) {
+        dropdown.classList.remove('active');
+        return;
+      }
+
+      // Combine and filter products from both categories
+      const allProducts = [...heroProducts.medical, ...heroProducts.recreational];
+      const suggestions = allProducts.filter(product => {
+        const name = product.name.toLowerCase();
+        const type = product.type.toLowerCase();
+        const effects = (product.effects || []).map(e => e.toLowerCase());
+        const mood = (product.mood || []).map(m => m.toLowerCase());
+        const conditions = (product.conditions || []).map(c => c.toLowerCase());
+        const slang = (product.slang || []).map(s => s.toLowerCase());
+
+        return (
+          name.includes(searchValue) ||
+          type.includes(searchValue) ||
+          effects.some(e => e.includes(searchValue)) ||
+          mood.some(m => m.includes(searchValue)) ||
+          conditions.some(c => c.includes(searchValue)) ||
+          slang.some(s => s.includes(searchValue))
+        );
+      }).slice(0, 8); // Limit to 8 suggestions
+
+      // Render suggestions
+      if (suggestions.length === 0) {
+        dropdown.innerHTML = `<div class="autosuggest-no-results">No products found</div>`;
+      } else {
+        dropdown.innerHTML = suggestions.map(product => {
+          const category = heroProducts.medical.some(p => p.id === product.id) ? 'medical' : 'recreational';
+          return `
+            <div class="autosuggest-item" onclick="selectHeroSuggestion('${product.name}', '${product.id}', '${category}')">
+              <div class="autosuggest-item-icon">🌿</div>
+              <div class="autosuggest-item-content">
+                <div class="autosuggest-item-name">${product.name}</div>
+                <div class="autosuggest-item-meta">${product.type}</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      dropdown.classList.add('active');
+    }
+
+    // Handle hero suggestion selection
+    function selectHeroSuggestion(productName, productId, category) {
+      const searchInput = document.getElementById('heroSearch');
+      searchInput.value = productName;
+      closeAutosuggest(searchInput);
+      window.location.href = `product.html?id=${productId}&category=${category}`;
+    }
+
     // Header scroll effect
     window.addEventListener('scroll', () => {
       const header = document.getElementById('header');
@@ -103,11 +205,11 @@
     // Search functionality
     function performSearch() {
       const searchTerm = document.getElementById('heroSearch').value.toLowerCase();
-      
+
       // Determine if search is more medical or recreational
       const medicalTerms = ['cbd', 'pain', 'anxiety', 'inflammation', 'medical', 'therapeutic', 'epilepsy'];
       const isMedical = medicalTerms.some(term => searchTerm.includes(term));
-      
+
       // Redirect to appropriate page with search parameter
       const targetPage = isMedical ? 'medical.html' : 'recreational.html';
       window.location.href = `${targetPage}?q=${encodeURIComponent(searchTerm)}`;
@@ -119,6 +221,9 @@
         performSearch();
       }
     });
+
+    // Initialize on page load
+    initHeroSearch();
   </script>
 </body>
 </html>

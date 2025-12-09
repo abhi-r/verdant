@@ -117,62 +117,61 @@
           </a>
         </div>
 
-        <!-- Product Header -->
-        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-xl); margin-bottom: var(--space-xl);">
-          <div>
-            <div style="width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--bg) 0%, var(--border-light) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; border: 1px solid var(--border);">
+        <!-- Product Header - Responsive Grid -->
+        <div class="product-header-grid">
+          <div class="product-image-container">
+            <div style="width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--bg) 0%, var(--border-light) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 5rem; border: 1px solid var(--border);">
               🌿
             </div>
           </div>
-          
-          <div>
+
+          <div class="product-info-container">
             <div style="display: inline-block; padding: 6px 16px; background: ${accentColor}; color: white; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: var(--space-sm);">
               ${product.type}
             </div>
-            <h1 style="margin-bottom: var(--space-sm);">${product.name}</h1>
+            <h1 style="margin-bottom: var(--space-xs);">${product.name}</h1>
             ${slangSection}
-            
-            <div style="display: flex; align-items: center; gap: var(--space-lg); margin: var(--space-lg) 0; padding: var(--space-md) 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
-              <div>
-                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">Rating</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: ${accentColor};">
-                  ${product.rating} ⭐
-                </div>
-                <div style="font-size: 0.85rem; color: var(--text-tertiary);">${window.verdant.formatNumber(totalReviews)} reviews</div>
-              </div>
-              
-              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg);">
-                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">THC</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--text);">${product.thc}</div>
-              </div>
-              
-              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg);">
-                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">CBD</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--text);">${product.cbd}</div>
-              </div>
-              
-              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg);">
-                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">Format</div>
-                <div style="font-size: 1.1rem; font-weight: 600; color: var(--text);">${product.format}</div>
-              </div>
-              
-              <div style="border-left: 1px solid var(--border); padding-left: var(--space-lg); margin-left: auto;">
-                <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 4px;">Est. Price</div>
-                <div style="font-size: 1.75rem; font-weight: 700; color: ${accentColor};">${product.price}</div>
-              </div>
-            </div>
-            
-            <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: var(--space-lg);">
+
+            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); margin: var(--space-sm) 0 var(--space-md);">
               ${product.description}
             </p>
+
+            <!-- Specs Grid - Responsive -->
+            <div class="product-specs-grid">
+              <div class="spec-item">
+                <div class="spec-label">Rating</div>
+                <div class="spec-value" style="color: ${accentColor};">${product.rating} ⭐</div>
+                <div class="spec-subtext">${window.verdant.formatNumber(totalReviews)} reviews</div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-label">THC</div>
+                <div class="spec-value">${product.thc}</div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-label">CBD</div>
+                <div class="spec-value">${product.cbd}</div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-label">Format</div>
+                <div class="spec-value">${product.format}</div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-label">Est. Price</div>
+                <div class="spec-value" style="color: ${accentColor}; font-size: 1.5rem;">${product.price}</div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Effects & Conditions -->
-        <div style="display: grid; grid-template-columns: ${isMedical ? '1fr 1fr' : '1fr'}; gap: var(--space-lg); margin-bottom: var(--space-lg);">
+        <div class="effects-conditions-grid">
           <div class="info-card">
-            <h3>${effectsLabel}</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-md);">
+            <h3 style="margin-top: 0;">${effectsLabel}</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
               ${effectsTags}
             </div>
           </div>
@@ -180,45 +179,39 @@
         </div>
 
         <!-- Aggregated Reviews -->
-        <div class="info-card" style="margin-bottom: var(--space-lg);">
-          <h3>Aggregated User Reviews</h3>
-          <p style="margin: var(--space-sm) 0; color: var(--text-secondary);">
-            Sentiment analysis based on ${window.verdant.formatNumber(totalReviews)} reviews from multiple platforms
+        <div class="info-card">
+          <h3 style="margin-top: 0;">Aggregated User Reviews</h3>
+          <p style="margin: var(--space-sm) 0 var(--space-md); color: var(--text-secondary); font-size: 0.95rem;">
+            Sentiment from ${window.verdant.formatNumber(totalReviews)} reviews
           </p>
-          
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-lg);">
-            <div style="text-align: center; padding: var(--space-md); background: rgba(95, 122, 97, 0.05); border-radius: 12px;">
-              <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: var(--space-xs);">${positivePct}%</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary);">Positive</div>
-              <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 4px;">${Math.round(totalReviews * positivePct / 100)} users</div>
+
+          <div class="sentiment-grid">
+            <div class="sentiment-item">
+              <div class="sentiment-percentage">${positivePct}%</div>
+              <div class="sentiment-label">Positive</div>
+              <div class="sentiment-count">${Math.round(totalReviews * positivePct / 100)} users</div>
             </div>
-            
-            <div style="text-align: center; padding: var(--space-md); background: var(--bg); border-radius: 12px;">
-              <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-secondary); margin-bottom: var(--space-xs);">${neutralPct}%</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary);">Neutral</div>
-              <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 4px;">${Math.round(totalReviews * neutralPct / 100)} users</div>
+
+            <div class="sentiment-item">
+              <div class="sentiment-percentage">${neutralPct}%</div>
+              <div class="sentiment-label">Neutral</div>
+              <div class="sentiment-count">${Math.round(totalReviews * neutralPct / 100)} users</div>
             </div>
-            
-            <div style="text-align: center; padding: var(--space-md); background: var(--bg); border-radius: 12px;">
-              <div style="font-size: 2.5rem; font-weight: 700; color: var(--text-tertiary); margin-bottom: var(--space-xs);">${negativePct}%</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary);">Negative</div>
-              <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 4px;">${Math.round(totalReviews * negativePct / 100)} users</div>
+
+            <div class="sentiment-item">
+              <div class="sentiment-percentage">${negativePct}%</div>
+              <div class="sentiment-label">Negative</div>
+              <div class="sentiment-count">${Math.round(totalReviews * negativePct / 100)} users</div>
             </div>
           </div>
 
-          <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--bg); border-left: 4px solid ${accentColor}; border-radius: 8px;">
-            <h4 style="margin-bottom: var(--space-sm);">Common User Feedback</h4>
-            <ul style="margin: 0; padding-left: var(--space-lg);">
-              <li style="margin: var(--space-xs) 0; color: var(--text-secondary);">
-                <strong>Most reported effect:</strong> ${isMedical ? 'Effective pain relief without sedation' : 'Balanced euphoria with clear-headedness'}
-              </li>
-              <li style="margin: var(--space-xs) 0; color: var(--text-secondary);">
-                <strong>Duration:</strong> Effects typically last 3-4 hours for most users
-              </li>
-              <li style="margin: var(--space-xs) 0; color: var(--text-secondary);">
-                <strong>Side effects:</strong> Minimal adverse effects reported; dry mouth most common
-              </li>
-              ${isMedical ? `<li style="margin: var(--space-xs) 0; color: var(--text-secondary);"><strong>Medical efficacy:</strong> 87% of users report symptom improvement</li>` : `<li style="margin: var(--space-xs) 0; color: var(--text-secondary);"><strong>User tip:</strong> Best enjoyed in social settings or creative activities</li>`}
+          <div class="feedback-box" style="border-left-color: ${accentColor};">
+            <h4>Common User Feedback</h4>
+            <ul>
+              <li><strong>Most reported effect:</strong> ${isMedical ? 'Effective pain relief without sedation' : 'Balanced euphoria with clear-headedness'}</li>
+              <li><strong>Duration:</strong> Effects typically last 3-4 hours</li>
+              <li><strong>Side effects:</strong> Minimal adverse effects; dry mouth most common</li>
+              ${isMedical ? `<li><strong>Medical efficacy:</strong> 87% report symptom improvement</li>` : `<li><strong>User tip:</strong> Best in social/creative settings</li>`}
             </ul>
           </div>
         </div>
