@@ -292,6 +292,10 @@ nav a.active::after {
   position: relative;
 }
 
+.search-bar {
+  position: relative;
+}
+
 .autosuggest-dropdown {
   display: none;
   position: absolute;
@@ -300,13 +304,12 @@ nav a.active::after {
   right: 0;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 16px 16px;
-  box-shadow: var(--shadow-md);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
   max-height: 400px;
   overflow-y: auto;
   z-index: 1000;
-  margin-top: -1px;
+  margin-top: 8px;
 }
 
 .autosuggest-dropdown.active {

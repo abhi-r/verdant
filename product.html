@@ -164,6 +164,16 @@
                 <div class="spec-value" style="color: ${accentColor}; font-size: 1.5rem;">${product.price}</div>
               </div>
             </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg);">
+              <a href="compare.html?category=${category}" class="btn btn-primary" style="flex: 1; text-align: center;">
+                Compare Products
+              </a>
+              <button onclick="addToCompare('${product.id}', '${category}')" class="btn" style="flex: 1; background: var(--bg); border: 1px solid var(--border); cursor: pointer;">
+                Add to Compare
+              </button>
+            </div>
           </div>
         </div>
 
@@ -239,6 +249,38 @@
       `;
       
       document.getElementById('productDetails').innerHTML = html;
+    }
+
+    // Add product to comparison
+    function addToCompare(productId, cat) {
+      // Get existing comparison data from localStorage
+      const comparisonData = JSON.parse(localStorage.getItem('comparisonData')) || {
+        category: cat,
+        products: []
+      };
+
+      // Only allow same category comparisons
+      if (comparisonData.category !== cat) {
+        alert('You can only compare products from the same category');
+        return;
+      }
+
+      // Check if product already in comparison
+      if (comparisonData.products.includes(productId)) {
+        alert('This product is already in your comparison');
+        return;
+      }
+
+      // Limit to 3 products
+      if (comparisonData.products.length >= 3) {
+        alert('You can compare up to 3 products at a time');
+        return;
+      }
+
+      // Add product and navigate to compare page
+      comparisonData.products.push(productId);
+      localStorage.setItem('comparisonData', JSON.stringify(comparisonData));
+      window.location.href = `compare.html?category=${cat}`;
     }
 
     // Header scroll effect

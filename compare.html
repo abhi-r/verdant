@@ -59,9 +59,18 @@
     async function init() {
       const urlParams = new URLSearchParams(window.location.search);
       category = urlParams.get('category') || 'recreational';
-      
+
       const data = await window.verdant.loadProducts();
       allProducts = data[category];
+
+      // Load products from localStorage if available
+      const comparisonData = JSON.parse(localStorage.getItem('comparisonData'));
+      if (comparisonData && comparisonData.category === category && comparisonData.products.length > 0) {
+        selectedProducts = allProducts.filter(p => comparisonData.products.includes(p.id));
+        renderComparison();
+        // Clear localStorage after loading
+        localStorage.removeItem('comparisonData');
+      }
     }
 
     function searchProducts() {
