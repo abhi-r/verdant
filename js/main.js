@@ -2,10 +2,10 @@
 
 // Application Version Configuration
 const APP_VERSION = {
-  version: '0.1.0',
-  timestamp: '2024-12-09 14:35',
+  number: 9,
+  codename: 'Apple',
   get full() {
-    return `v${this.version} · ${this.timestamp}`;
+    return `v${this.number} · ${this.codename}`;
   }
 };
 
