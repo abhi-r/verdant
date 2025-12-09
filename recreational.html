@@ -37,7 +37,7 @@
 
       <div style="display: grid; grid-template-columns: 300px 1fr; gap: var(--space-lg);">
         <!-- Filters Sidebar -->
-        <aside>
+        <aside class="filters-sidebar">
           <div class="filters-container">
             <h3 style="margin-bottom: var(--space-md); font-size: 1.25rem;">Filters</h3>
             
@@ -126,6 +126,23 @@
     </div>
   </main>
 
+  <!-- Mobile Filter Toggle Button -->
+  <button class="filter-toggle-btn" onclick="toggleFilterPanel()">🔧</button>
+
+  <!-- Filter Overlay -->
+  <div class="filter-overlay" id="filterOverlay" onclick="closeFilterPanel()"></div>
+
+  <!-- Mobile Filter Panel -->
+  <div class="filters-panel" id="filtersPanel">
+    <div class="filters-panel-header show">
+      <h2>Filters</h2>
+      <button class="filters-panel-close" onclick="closeFilterPanel()">✕</button>
+    </div>
+    <div class="filters-container" id="mobileFiltersContainer">
+      <!-- Filters will be cloned here for mobile -->
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
   <script>
     let products = [];
@@ -135,11 +152,14 @@
     async function init() {
       const data = await window.verdant.loadProducts();
       products = data.recreational;
-      
+
       // Setup event listeners
       window.verdant.setupFilterTags(activeFilters, applyFilters);
       window.verdant.setupSearch(activeFilters, applyFilters);
-      
+
+      // Setup mobile filter panel
+      setupMobileFilters();
+
       // Initial render
       applyFilters();
     }
@@ -158,6 +178,46 @@
       });
       document.getElementById('searchInput').value = '';
       applyFilters();
+    }
+
+    // Mobile filter panel functions
+    function toggleFilterPanel() {
+      const panel = document.getElementById('filtersPanel');
+      const overlay = document.getElementById('filterOverlay');
+      panel.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = panel.classList.contains('active') ? 'hidden' : 'auto';
+    }
+
+    function closeFilterPanel() {
+      const panel = document.getElementById('filtersPanel');
+      const overlay = document.getElementById('filterOverlay');
+      panel.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function setupMobileFilters() {
+      // Clone filter container for mobile
+      const desktopContainer = document.querySelector('.filters-sidebar .filters-container');
+      const mobileContainer = document.getElementById('mobileFiltersContainer');
+
+      if (desktopContainer && mobileContainer) {
+        mobileContainer.innerHTML = desktopContainer.innerHTML;
+
+        // Setup event listeners for mobile filters
+        mobileContainer.querySelectorAll('.filter-tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+            const desktopTag = document.querySelector(
+              `.filters-sidebar .filter-tag[data-filter="${tag.dataset.filter}"][data-value="${tag.dataset.value}"]`
+            );
+            if (desktopTag) {
+              desktopTag.click();
+              tag.classList.toggle('active');
+            }
+          });
+        });
+      }
     }
 
     // Header scroll effect

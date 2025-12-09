@@ -415,6 +415,115 @@ nav a.active::after {
   border-color: var(--primary);
 }
 
+/* Mobile Filter Toggle Button */
+.filter-toggle-btn {
+  display: none;
+  position: fixed;
+  bottom: var(--space-lg);
+  left: var(--space-lg);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  transition: var(--transition);
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-toggle-btn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* Filter Overlay for Mobile */
+.filter-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.filter-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Mobile Filter Panel */
+.filters-panel {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  max-width: 340px;
+  height: 100vh;
+  background: var(--surface);
+  z-index: 1002;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.filters-panel.active {
+  left: 0;
+}
+
+.filters-panel-header {
+  display: none;
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.filters-panel-header.show {
+  display: flex;
+}
+
+.filters-panel-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.filters-panel-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.filters-panel-close:hover {
+  color: var(--primary);
+}
+
+/* Desktop Filter Sidebar */
+.filters-sidebar {
+  display: block;
+}
+
 /* Product Grid */
 .products-grid {
   display: grid;
@@ -640,28 +749,82 @@ nav a.active::after {
     --space-lg: 2rem;
     --space-xl: 3rem;
   }
-  
+
   .header-content {
     padding: 0 var(--space-sm);
   }
-  
+
   nav ul {
     gap: var(--space-md);
   }
-  
+
   .hero {
-    padding: var(--space-lg) var(--space-sm);
+    padding-top: calc(var(--header-height) + var(--space-lg));
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+    padding-bottom: var(--space-lg);
   }
-  
+
   .path-cards {
     grid-template-columns: 1fr;
   }
-  
+
+  /* Filter Mobile Layout */
+  main > .container > div[style*="grid-template-columns: 300px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .filters-sidebar {
+    display: none;
+  }
+
+  .filter-toggle-btn {
+    display: flex;
+  }
+
+  .filters-panel {
+    padding-top: var(--space-md);
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    padding-bottom: var(--space-lg);
+  }
+
+  .filters-panel-header.show {
+    display: flex;
+  }
+
+  .filters-container {
+    border: none;
+    padding: 0;
+    margin-bottom: var(--space-md);
+    background: transparent;
+  }
+
+  .filters-container h3 {
+    display: none;
+  }
+
+  .filter-group {
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-md);
+  }
+
+  .filter-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .info-card {
+    display: none;
+  }
+
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: var(--space-md);
   }
-  
+
   .comparison-container {
     grid-template-columns: 1fr;
   }
