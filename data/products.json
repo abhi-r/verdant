@@ -743,7 +743,7 @@
       "cbd": "0.1%",
       "format": "Flower",
       "effects": ["euphoria", "relaxation", "creativity"],
-      "mood": "happy", "relaxed", "uplifted"],
+      "mood": ["happy", "relaxed", "uplifted"],
       "rating": 4.8,
       "reviews": 4234,
       "price": "€44",
