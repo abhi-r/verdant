@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verdant - Cannabis Discovery Platform</title>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/guided-flow.css">
 </head>
 <body>
   <header id="header">
@@ -35,6 +36,17 @@
             <button onclick="performSearch()">Search</button>
           </div>
           <!-- Autosuggest dropdown will be inserted here -->
+        </div>
+
+        <!-- Guided Discovery Button -->
+        <div class="guided-discovery-cta" style="text-align: center; margin: var(--space-lg) 0;">
+          <button id="guidedFlowBtn" class="btn btn-primary btn-large">
+            <span class="btn-icon">🧭</span>
+            <span class="btn-text">Help me find my stuff</span>
+          </button>
+          <p style="font-size: 0.9rem; color: var(--text-tertiary); margin-top: var(--space-xs);">
+            Answer a few questions to discover the perfect products
+          </p>
         </div>
 
         <div class="path-cards">
@@ -283,5 +295,56 @@
     // Initialize on page load
     initHeroSearch();
   </script>
+
+  <!-- Guided Flow Modal -->
+  <div id="guidedFlowModal" class="guided-modal" role="dialog" aria-labelledby="guidedModalTitle" aria-modal="true">
+    <div class="guided-modal-overlay"></div>
+    <div class="guided-modal-content">
+      <!-- Header with progress bar and close button -->
+      <div class="guided-modal-header">
+        <div class="guided-progress">
+          <div class="guided-progress-bar" id="progressBar"></div>
+          <div class="guided-progress-text" id="progressText">Question 1 of 5</div>
+        </div>
+        <button class="guided-modal-close" id="closeModalBtn" aria-label="Close guided flow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Question Content -->
+      <div class="guided-modal-body" id="modalBody">
+        <h2 id="questionTitle" class="guided-question-title">What do you need?</h2>
+        <p id="questionSubtitle" class="guided-question-subtitle"></p>
+
+        <!-- Options Container -->
+        <div id="optionsContainer" class="guided-options">
+          <!-- Options will be dynamically inserted -->
+        </div>
+      </div>
+
+      <!-- Footer with Navigation -->
+      <div class="guided-modal-footer">
+        <button id="backBtn" class="btn btn-secondary btn-back" style="visibility: hidden;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back
+        </button>
+        <button id="nextBtn" class="btn btn-primary" disabled>
+          Next
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/guided-flow.js"></script>
 </body>
 </html>

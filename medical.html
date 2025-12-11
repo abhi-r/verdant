@@ -207,9 +207,15 @@
       const data = await window.verdant.loadProducts();
       products = data.medical;
 
+      // Apply URL filters from guided flow (if present)
+      window.verdant.applyURLFilters(activeFilters);
+
       // Setup event listeners
       window.verdant.setupFilterTags(activeFilters, applyFilters);
       window.verdant.setupSearch(activeFilters, applyFilters, products, 'medical');
+
+      // Activate filter tags based on URL parameters
+      window.verdant.activateFilterTags(activeFilters);
 
       // Setup mobile filter panel
       setupMobileFilters();

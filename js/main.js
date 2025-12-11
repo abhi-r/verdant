@@ -382,6 +382,94 @@ function getSentimentBadge(sentiment) {
   return `<span style="display: inline-block; padding: 4px 12px; background: ${colors[sentiment]}; color: white; border-radius: 12px; font-size: 0.8rem;">${sentiment}</span>`;
 }
 
+// Parse and apply URL filters from guided flow
+function applyURLFilters(activeFilters) {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // Check if this came from guided flow
+  const isFromGuidedFlow = urlParams.get('guided') === '1';
+
+  // Parse array filters
+  if (urlParams.has('conditions')) {
+    activeFilters.conditions = urlParams.get('conditions').split(',').map(v => v.trim());
+  }
+
+  if (urlParams.has('effects')) {
+    activeFilters.effects = urlParams.get('effects').split(',').map(v => v.trim());
+  }
+
+  if (urlParams.has('format')) {
+    activeFilters.format = urlParams.get('format').split(',').map(v => v.trim());
+  }
+
+  if (urlParams.has('type')) {
+    activeFilters.type = urlParams.get('type').split(',').map(v => v.trim());
+  }
+
+  // Parse single value filters
+  if (urlParams.has('cbdRange')) {
+    activeFilters.cbdRange = urlParams.get('cbdRange');
+  }
+
+  if (urlParams.has('thcRange')) {
+    activeFilters.thcRange = urlParams.get('thcRange');
+  }
+
+  // Show notification if from guided flow
+  if (isFromGuidedFlow) {
+    setTimeout(() => {
+      showGuidedFlowNotification();
+    }, 300);
+  }
+
+  return activeFilters;
+}
+
+// Activate filter tags based on active filters
+function activateFilterTags(activeFilters) {
+  const filterTags = document.querySelectorAll('.filter-tag');
+
+  filterTags.forEach(tag => {
+    const filterType = tag.dataset.filter;
+    const filterValue = tag.dataset.value;
+
+    if (activeFilters[filterType]) {
+      if (Array.isArray(activeFilters[filterType])) {
+        if (activeFilters[filterType].includes(filterValue)) {
+          tag.classList.add('active');
+        }
+      } else if (activeFilters[filterType] === filterValue) {
+        tag.classList.add('active');
+      }
+    }
+  });
+}
+
+// Show notification that filters have been applied from guided flow
+function showGuidedFlowNotification() {
+  const notification = document.createElement('div');
+  notification.className = 'guided-notification';
+  notification.innerHTML = `
+    <div class="guided-notification-content">
+      <span class="guided-notification-icon">✓</span>
+      <span class="guided-notification-text">Filters applied based on your preferences</span>
+      <button class="guided-notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+    </div>
+  `;
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.add('active');
+  }, 10);
+
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    notification.classList.remove('active');
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
+}
+
 // Export functions for use in HTML pages
 window.verdant = {
   loadProducts,
@@ -392,5 +480,8 @@ window.verdant = {
   viewProduct,
   getStarRating,
   formatNumber,
-  getSentimentBadge
+  getSentimentBadge,
+  applyURLFilters,
+  activateFilterTags,
+  showGuidedFlowNotification
 };
